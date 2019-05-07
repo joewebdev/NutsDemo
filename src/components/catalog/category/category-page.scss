@@ -1,0 +1,108 @@
+// BEM Scss naming convention modified slightly for easier maintenance
+
+.category {
+    &--listing {
+        width:100%;
+        display: block;
+        max-width:1280px;
+        margin: 0 auto;
+    }
+    &--item {
+        width:100%;
+        padding:10px;
+        display: inline-block;
+        box-sizing: border-box;
+        @media (min-width:768px) {
+            width:50%
+        }
+        @media (min-width:1024px) {
+            width: 33%
+        }
+    }
+}
+
+
+// For the sake of this demo, global scss will live here
+a {
+    color: #000;
+    text-decoration: none;
+}
+%image--container {
+    background-color: transparent;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+$_IMAGE_RATIO_PORTRAIT: (100% * 5 / 4);
+$_IMAGE_RATIO_LANDSCAPE: (100% * 5 / 8);
+$_IMAGE_RATIO_SQUARE: 100%;
+$_IMAGE_RATIO_VIDEO: (100% * 9 / 16);
+
+.image--container {
+    &_portrait {
+        @extend %image--container;
+
+        &::before {
+            content: "";
+            height: 0;
+            display: block;
+            width: 100%;
+            padding-bottom: $_IMAGE_RATIO_PORTRAIT;
+        }
+    }
+
+    &_landscape {
+        @extend %image--container;
+
+        &::before {
+            content: "";
+            height: 0;
+            display: block;
+            width: 100%;
+            padding-bottom: $_IMAGE_RATIO_LANDSCAPE;
+        }
+    }
+
+    &_square {
+        @extend %image--container;
+
+        &::before {
+            content: "";
+            height: 0;
+            display: block;
+            width: 100%;
+            padding-bottom: $_IMAGE_RATIO_SQUARE;
+        }
+    }
+
+}
+
+.image {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+
+    &--gutter {
+        padding: 25px;
+    }
+}
+
+img:not([src]) {
+    visibility: hidden;
+}
+
+img[data-src],
+img[data-srcset] {
+    display: block;
+    min-height: 1px;
+}
